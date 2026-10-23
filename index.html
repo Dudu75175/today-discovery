@@ -96,23 +96,37 @@
     footer{margin-top:45px;border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:12px;line-height:1.9}
     .footerlinks{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:12px}
     @media(max-width:700px){.wrap{padding:0 16px}.head{height:auto;padding:17px 0;flex-wrap:wrap}.search{width:100%;order:2}.hero{padding:28px 22px;min-height:220px}.hero-art{font-size:65px;min-width:70px}h1{font-size:30px}.categories{grid-template-columns:repeat(2,1fr);gap:10px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.visual{height:130px}.pbody{padding:11px}.nav{gap:20px}.section-head{margin-top:32px}}
-    .buy {
-  display: inline-block;
+    
+.buy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #087f3e;
   color: #ffffff;
-  padding: 12px 16px;
+  padding: 13px 18px;
   border-radius: 10px;
   text-decoration: none;
+  font-size: 14px;
   font-weight: 700;
+  line-height: 1.4;
   margin-top: auto;
   align-self: flex-start;
+  transition: background 0.2s ease, transform 0.2s ease,
+              box-shadow 0.2s ease;
 }
 
 .buy:hover {
   background: #066532;
   color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(8, 127, 62, 0.2);
 }
-    
+
+.buy:focus-visible {
+  outline: 3px solid #9bd7b1;
+  outline-offset: 3px;
+}
+ 
 /* 상품명 */
 .product h3 {
   font-size: 17px;
