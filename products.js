@@ -1,7 +1,7 @@
 window.TODAY_PRODUCTS = [
 {
   category: "생활·주방",
-  name: "까사베니 연마제 없는 스테인레스 김치통, 2.8L, 1개",
+  name: "까사베니 연마제 없는 스테인레스 김치통, 1.8L, 1개",
   price: "10,990원",
   link: "https://link.coupang.com/a/h5mSKx4OYu",
   image: "./kimchi-container.jpg",
