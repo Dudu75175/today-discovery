@@ -92,35 +92,105 @@
     <div class="notice">안내: 현재 화면은 사이트 디자인을 확인하기 위한 시제품입니다. 실제 판매 상품, 가격, 재고, 제휴 링크는 아직 연결되지 않았습니다. 향후 제휴 링크가 포함되면 관련 법령과 제휴 프로그램 정책에 맞는 고지 문구를 표시할 예정입니다.</div>
   </main>
   <footer><div class="wrap"><div class="footerlinks"><a href="#about">사이트 소개</a><a href="#contact">문의 안내</a><a href="#policy">개인정보 처리방침</a></div><strong>오늘의발견</strong><div>좋은 상품을 발견하고 현명하게 선택하는 쇼핑 큐레이션</div><div>© 오늘의발견. 서비스 준비 중</div></div></footer>
-  <script>
-    const search = document.getElementById('search');
-    const cards = [...document.querySelectorAll('.product')];
-    const navButtons = [...document.querySelectorAll('#nav button')];
-    let selected = '전체';
-    function update(){
-      const q = search.value.trim().toLowerCase();
-      let count = 0;
-      cards.forEach(card=>{
-        const matchCat = selected === '전체' || card.dataset.cat === selected;
-        const matchText = (card.dataset.name + ' ' + card.innerText).toLowerCase().includes(q);
-        card.style.display = matchCat && matchText ? '' : 'none';
-        if(matchCat && matchText) count++;
-      });
-      document.getElementById('empty').style.display = count ? 'none' : 'block';
-      document.getElementById('resultCount').textContent = count + '개 예시 상품';
-    }
-    navButtons.forEach(btn=>btn.addEventListener('click',()=>{
-      selected=btn.dataset.cat;
-      navButtons.forEach(b=>b.classList.toggle('active',b===btn));
+
+<script src="products.js"></script>
+<script>
+  const search = document.getElementById('search');
+  const productArea = document.getElementById('products');
+  const navButtons = [...document.querySelectorAll('#nav button')];
+  let selected = '전체';
+
+  // 상품 정보에 HTML 특수문자가 있어도 안전하게 표시합니다.
+  function escapeHTML(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[char]);
+  }
+
+  // products.js의 상품 목록으로 카드 자동 생성
+  const products = Array.isArray(window.TODAY_PRODUCTS)
+    ? window.TODAY_PRODUCTS
+    : [];
+
+  productArea.innerHTML = products.map(item => {
+    const category = escapeHTML(item.category);
+    const name = escapeHTML(item.name);
+    const price = escapeHTML(item.price);
+    const link = escapeHTML(item.link);
+    const icon = escapeHTML(item.icon || '🛍️');
+    const label = escapeHTML(item.label || '오늘의 추천');
+
+    return `
+      <article class="product"
+        data-cat="${category}"
+        data-name="${name}">
+        <div class="visual">${icon}</div>
+        <div class="pbody">
+          <div class="label">${label}</div>
+          <h3>${name}</h3>
+          <div class="price">${price}</div>
+          <div class="note">상품 가격과 재고는 판매 페이지에서 확인해 주세요.</div>
+          <a href="${link}" target="_blank"
+             rel="sponsored nofollow noopener"
+             class="buy">쿠팡에서 상품 보기 ↗</a>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  // 상품 생성이 끝난 뒤 카드 목록을 가져옵니다.
+  const cards = [...document.querySelectorAll('.product')];
+
+  function update() {
+    const q = search.value.trim().toLowerCase();
+    let count = 0;
+
+    cards.forEach(card => {
+      const matchCat =
+        selected === '전체' || card.dataset.cat === selected;
+      const matchText =
+        (card.dataset.name + ' ' + card.innerText)
+          .toLowerCase().includes(q);
+
+      card.style.display = matchCat && matchText ? '' : 'none';
+      if (matchCat && matchText) count++;
+    });
+
+    document.getElementById('empty').style.display =
+      count ? 'none' : 'block';
+
+    document.getElementById('resultCount').textContent =
+      count + '개 상품';
+  }
+
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      selected = btn.dataset.cat;
+      navButtons.forEach(b =>
+        b.classList.toggle('active', b === btn)
+      );
       update();
-    }));
-    document.querySelectorAll('[data-pick]').forEach(btn=>btn.addEventListener('click',()=>{
-      selected=btn.dataset.pick;
-      navButtons.forEach(b=>b.classList.toggle('active',b.dataset.cat===selected));
+    });
+  });
+
+  document.querySelectorAll('[data-pick]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selected = btn.dataset.pick;
+      navButtons.forEach(b =>
+        b.classList.toggle('active', b.dataset.cat === selected)
+      );
       update();
-      document.getElementById('recommend').scrollIntoView({behavior:'smooth'});
-    }));
-    search.addEventListener('input',update);
-  </script>
+      document.getElementById('recommend')
+        .scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  search.addEventListener('input', update);
+  update();
+</script>
 </body>
 </html>
