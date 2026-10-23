@@ -1,1 +1,129 @@
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="오늘의발견 - 일상에 필요한 좋은 상품을 발견하는 쇼핑 큐레이션">
+  <title>오늘의발견 | 발견하는 즐거움</title>
+  <style>
+    :root{--ink:#20251f;--muted:#73786f;--green:#426b4b;--cream:#f7f7f1;--line:#e9eae3}
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--ink);font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#fff}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1120px;margin:auto;padding:0 24px}
+    .top{background:#f3f5ed;text-align:center;padding:10px 16px;font-size:12px;color:#53664f}
+    header{border-bottom:1px solid var(--line)}
+    .head{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .logo{font-size:25px;font-weight:900;letter-spacing:-1.5px}
+    .logo span{color:var(--green)}
+    .tagline{font-size:12px;color:var(--muted);margin-top:4px}
+    .search{width:min(340px,40%);position:relative}
+    .search input{width:100%;border:1px solid #e1e4da;border-radius:24px;padding:12px 16px;outline-color:var(--green);background:#fafbf8}
+    .nav{display:flex;gap:26px;overflow:auto;padding:15px 0;white-space:nowrap;font-size:14px}
+    .nav button{border:0;background:none;padding:4px 0;color:#555}
+    .nav button.active{font-weight:bold;color:var(--green)}
+    .hero{margin-top:28px;background:var(--cream);border-radius:18px;min-height:270px;padding:38px 42px;display:flex;align-items:center;justify-content:space-between;gap:20px;overflow:hidden}
+    .eyebrow{font-size:12px;letter-spacing:2px;color:var(--green);font-weight:bold}
+    h1{font-size:clamp(30px,4vw,46px);letter-spacing:-2px;line-height:1.25;margin:14px 0}
+    .hero p{color:#646a60;line-height:1.8;font-size:14px}
+    .hero-art{font-size:100px;min-width:150px;text-align:center}
+    .hero a{display:inline-block;background:var(--green);color:white;padding:12px 20px;border-radius:7px;margin-top:10px;font-size:13px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:42px 0 20px}
+    h2{font-size:23px;letter-spacing:-1px;margin:0 0 7px}
+    .sub{font-size:13px;color:var(--muted)}
+    .categories{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .cat{border:1px solid var(--line);background:#fff;border-radius:12px;padding:20px 10px;text-align:center}
+    .cat .emoji{font-size:29px;margin-bottom:10px}
+    .cat strong{display:block;font-size:14px}
+    .cat small{display:block;color:var(--muted);margin-top:6px;font-size:11px}
+    .products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+    .product{border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
+    .visual{height:165px;background:#f4f5ef;display:flex;align-items:center;justify-content:center;font-size:62px}
+    .pbody{padding:14px}
+    .label{font-size:10px;color:var(--green);font-weight:bold}
+    .pbody h3{font-size:14px;line-height:1.5;min-height:42px;margin:8px 0}
+    .price{font-size:17px;font-weight:800}
+    .note{font-size:11px;color:var(--muted);margin-top:7px;line-height:1.5}
+    .empty{display:none;padding:32px;text-align:center;color:var(--muted);grid-column:1/-1}
+    .notice{margin-top:32px;background:#fafaf7;border-radius:12px;padding:18px;font-size:12px;color:#6e736a;line-height:1.8}
+    footer{margin-top:45px;border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:12px;line-height:1.9}
+    .footerlinks{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:12px}
+    @media(max-width:700px){.wrap{padding:0 16px}.head{height:auto;padding:17px 0;flex-wrap:wrap}.search{width:100%;order:2}.hero{padding:28px 22px;min-height:220px}.hero-art{font-size:65px;min-width:70px}h1{font-size:30px}.categories{grid-template-columns:repeat(2,1fr);gap:10px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.visual{height:130px}.pbody{padding:11px}.nav{gap:20px}.section-head{margin-top:32px}}
+  </style>
+</head>
+<body>
+  <div class="top">오늘 발견한 좋은 선택, 오늘의발견</div>
+  <header>
+    <div class="wrap head">
+      <div><a class="logo" href="#">오늘의<span>발견.</span></a><div class="tagline">발견하는 즐거움, 현명한 쇼핑</div></div>
+      <div class="search"><input id="search" type="search" placeholder="어떤 상품을 찾으세요?" aria-label="상품 검색"></div>
+    </div>
+    <div class="wrap nav" id="nav">
+      <button class="active" data-cat="전체">전체</button>
+      <button data-cat="생활·주방">생활·주방</button>
+      <button data-cat="IT·가전">IT·가전</button>
+      <button data-cat="뷰티·패션">뷰티·패션</button>
+      <button data-cat="선물·취미">선물·취미</button>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="hero">
+      <div><div class="eyebrow">DISCOVER SOMETHING GOOD</div><h1>잘 고른 하나가<br>일상을 바꿉니다.</h1><p>매일 쓰는 물건부터 새로운 발견까지,<br>눈여겨볼 만한 상품을 소개합니다.</p><a href="#recommend">추천 상품 둘러보기 →</a></div>
+      <div class="hero-art" aria-hidden="true">✦ 🛍️</div>
+    </section>
+    <section>
+      <div class="section-head"><div><h2>관심 카테고리</h2><div class="sub">원하는 분야에서 새로운 발견을 시작하세요.</div></div></div>
+      <div class="categories">
+        <button class="cat" data-pick="생활·주방"><div class="emoji">🏡</div><strong>생활·주방</strong><small>매일 쓰는 실용 아이템</small></button>
+        <button class="cat" data-pick="IT·가전"><div class="emoji">🎧</div><strong>IT·가전</strong><small>생활을 편리하게</small></button>
+        <button class="cat" data-pick="뷰티·패션"><div class="emoji">✨</div><strong>뷰티·패션</strong><small>나를 위한 작은 변화</small></button>
+        <button class="cat" data-pick="선물·취미"><div class="emoji">🎁</div><strong>선물·취미</strong><small>취향을 발견하는 시간</small></button>
+      </div>
+    </section>
+    <section id="recommend">
+      <div class="section-head"><div><h2>오늘의 추천 상품</h2><div class="sub" id="resultCount">가볍게 둘러보는 상품 예시입니다.</div></div></div>
+      <div class="products" id="products">
+        <article class="product" data-cat="생활·주방" data-name="공간 절약 수납 정리함"><div class="visual">🧺</div><div class="pbody"><div class="label">생활·주방 · 예시</div><h3>공간을 깔끔하게 정리하는 수납 아이템</h3><div class="price">가격 정보 준비 중</div><div class="note">실제 상품 및 판매 가격은 아직 연결되지 않았습니다.</div></div></article>
+        <article class="product" data-cat="IT·가전" data-name="데스크 무선 충전기"><div class="visual">🔋</div><div class="pbody"><div class="label">IT·가전 · 예시</div><h3>책상 위를 간결하게 만드는 충전 아이템</h3><div class="price">가격 정보 준비 중</div><div class="note">실제 상품 및 판매 가격은 아직 연결되지 않았습니다.</div></div></article>
+        <article class="product" data-cat="뷰티·패션" data-name="데일리 파우치"><div class="visual">👝</div><div class="pbody"><div class="label">뷰티·패션 · 예시</div><h3>외출할 때 유용한 데일리 정리 파우치</h3><div class="price">가격 정보 준비 중</div><div class="note">실제 상품 및 판매 가격은 아직 연결되지 않았습니다.</div></div></article>
+        <article class="product" data-cat="선물·취미" data-name="취미 선물 아이디어"><div class="visual">🎨</div><div class="pbody"><div class="label">선물·취미 · 예시</div><h3>취향을 더하는 작은 선물 아이디어</h3><div class="price">가격 정보 준비 중</div><div class="note">실제 상품 및 판매 가격은 아직 연결되지 않았습니다.</div></div></article>
+      </div>
+      <div class="empty" id="empty">검색 결과가 없습니다. 다른 검색어를 입력해 주세요.</div>
+    </section>
+    <div class="notice">안내: 현재 화면은 사이트 디자인을 확인하기 위한 시제품입니다. 실제 판매 상품, 가격, 재고, 제휴 링크는 아직 연결되지 않았습니다. 향후 제휴 링크가 포함되면 관련 법령과 제휴 프로그램 정책에 맞는 고지 문구를 표시할 예정입니다.</div>
+  </main>
+  <footer><div class="wrap"><div class="footerlinks"><a href="#about">사이트 소개</a><a href="#contact">문의 안내</a><a href="#policy">개인정보 처리방침</a></div><strong>오늘의발견</strong><div>좋은 상품을 발견하고 현명하게 선택하는 쇼핑 큐레이션</div><div>© 오늘의발견. 서비스 준비 중</div></div></footer>
+  <script>
+    const search = document.getElementById('search');
+    const cards = [...document.querySelectorAll('.product')];
+    const navButtons = [...document.querySelectorAll('#nav button')];
+    let selected = '전체';
+    function update(){
+      const q = search.value.trim().toLowerCase();
+      let count = 0;
+      cards.forEach(card=>{
+        const matchCat = selected === '전체' || card.dataset.cat === selected;
+        const matchText = (card.dataset.name + ' ' + card.innerText).toLowerCase().includes(q);
+        card.style.display = matchCat && matchText ? '' : 'none';
+        if(matchCat && matchText) count++;
+      });
+      document.getElementById('empty').style.display = count ? 'none' : 'block';
+      document.getElementById('resultCount').textContent = count + '개 예시 상품';
+    }
+    navButtons.forEach(btn=>btn.addEventListener('click',()=>{
+      selected=btn.dataset.cat;
+      navButtons.forEach(b=>b.classList.toggle('active',b===btn));
+      update();
+    }));
+    document.querySelectorAll('[data-pick]').forEach(btn=>btn.addEventListener('click',()=>{
+      selected=btn.dataset.pick;
+      navButtons.forEach(b=>b.classList.toggle('active',b.dataset.cat===selected));
+      update();
+      document.getElementById('recommend').scrollIntoView({behavior:'smooth'});
+    }));
+    search.addEventListener('input',update);
+  </script>
+</body>
+</html>
