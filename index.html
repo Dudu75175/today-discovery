@@ -66,6 +66,12 @@
   background: #066532;
   color: #ffffff;
 }
+    .visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
   </style>
 </head>
 <body>
@@ -143,7 +149,15 @@
       <article class="product"
         data-cat="${category}"
         data-name="${name}">
-        <div class="visual">${icon}</div>
+        <div class="visual">
+  ${
+    item.image
+      ? `<img src="${escapeHTML(item.image)}"
+              alt="${escapeHTML(item.name)}"
+              loading="lazy">`
+      : icon
+  }
+</div>
         <div class="pbody">
           <div class="label">${label}</div>
           <h3>${name}</h3>
