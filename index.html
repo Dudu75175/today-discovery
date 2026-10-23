@@ -167,10 +167,13 @@
         <div class="visual">
   ${
     item.image
-      ? `<img src="${escapeHTML(item.image)}"
-              alt="${escapeHTML(item.name)}"
-              loading="lazy">`
-      : icon
+  ? `<img
+       src="${escapeHTML(item.image)}"
+       alt="${escapeHTML(item.name)}"
+       loading="eager"
+       onerror="this.style.display='none'; this.parentElement.textContent='이미지 불러오기 실패';"
+     >`
+  : icon
   }
 </div>
         <div class="pbody">
