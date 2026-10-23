@@ -12,7 +12,8 @@ window.TODAY_PRODUCTS = [
     category: "생활·주방",
     name: "스너글 허거블 선샤인 섬유유연제 햇빛건조향 리필",
     price: "8,990원",
-    link: "https://link.coupang.com/a/h5j4XXDr2G",
+    link: "https://link.coupang.com/a/h5pgp5f30e",
+    image: "./snuggle-softener.jpg",
     icon: "🧺",
     label: "생활·리빙 · 추천 상품"
   }
