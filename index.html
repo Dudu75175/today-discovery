@@ -201,7 +201,23 @@
       <div class="section-head"><div><h2>오늘의 추천 상품</h2><div class="sub" id="resultCount">가볍게 둘러보는 상품 예시입니다.</div></div></div>
       <div class="products" id="products">
       </div>
-      <div class="empty" id="empty">검색 결과가 없습니다. 다른 검색어를 입력해 주세요.</div>
+      
+<div class="empty" id="empty">
+  <div style="font-size:36px;margin-bottom:12px;">🔎</div>
+  <h3 style="margin:0 0 8px;font-size:18px;color:#222;">
+    검색 결과가 없습니다
+  </h3>
+  <p style="margin:0 0 18px;color:#777;font-size:14px;">
+    다른 검색어를 입력하거나 전체 상품을 확인해 보세요.
+  </p>
+  <button
+    type="button"
+    onclick="resetProductSearch()"
+    style="background:#087f3e;color:#fff;border:0;border-radius:10px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;">
+    전체 상품 보기
+  </button>
+</div>
+
     </section>
     <div class="notice">안내: 현재 화면은 사이트 디자인을 확인하기 위한 시제품입니다. 실제 판매 상품, 가격, 재고, 제휴 링크는 아직 연결되지 않았습니다. 향후 제휴 링크가 포함되면 관련 법령과 제휴 프로그램 정책에 맞는 고지 문구를 표시할 예정입니다.</div>
   </main>
@@ -315,8 +331,20 @@
     });
   });
 
-  search.addEventListener('input', update);
+  
+function resetProductSearch() {
+  search.value = '';
+  selected = '전체';
+
+  navButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cat === '전체');
+  });
+
   update();
+}
+
+search.addEventListener('input', update);
+update();
 </script>
 </body>
 </html>
