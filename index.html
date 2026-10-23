@@ -168,11 +168,12 @@
   ${
     item.image
   ? `<img
-       src="${escapeHTML(item.image)}"
-       alt="${escapeHTML(item.name)}"
-       loading="eager"
-       onerror="this.style.display='none'; this.parentElement.textContent='이미지 불러오기 실패';"
-     >`
+  src="${escapeHTML(item.image)}"
+  alt="${escapeHTML(item.name)}"
+  loading="eager"
+  referrerpolicy="no-referrer"
+  onerror="this.style.display='none'; this.parentElement.textContent='이미지 불러오기 실패';"
+/>`
   : icon
   }
 </div>
