@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dudu75175.github.io/today-discovery/sitemap.xml
