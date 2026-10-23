@@ -40,7 +40,22 @@
     .cat small{display:block;color:var(--muted);margin-top:6px;font-size:11px}
     .products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
     .product{border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
-    .visual{height:165px;background:#f4f5ef;display:flex;align-items:center;justify-content:center;font-size:62px}
+    .visual {
+  height: 165px;
+  background: #f4f5ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 62px;
+  overflow: hidden;
+}
+
+.visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
     .pbody{padding:14px}
     .label{font-size:10px;color:var(--green);font-weight:bold}
     .pbody h3{font-size:14px;line-height:1.5;min-height:42px;margin:8px 0}
